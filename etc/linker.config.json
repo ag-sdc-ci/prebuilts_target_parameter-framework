@@ -1,0 +1,38 @@
+{
+	"provideLibs": [	
+		    "libdummy_binary_domainGeneratorConnector-x86_64-v2.so",
+		    "libdummy_binary_domainGeneratorConnector.so",
+		    "libdummy_binary_libparameter-x86_64-v2.so.so",
+		    "libdummy_binary_libparameter.a-x86_64-v2.so",
+		    "libdummy_binary_libparameter.a.so",
+		    "libdummy_binary_libparameter.so.so",
+		    "libdummy_binary_libpfw-utility.a-x86_64-v2.so",
+		    "libdummy_binary_libpfw-utility.a.so",
+		    "libdummy_binary_libremote-processor-x86_64-v2.so.so",
+		    "libdummy_binary_libremote-processor.a-x86_64-v2.so",
+		    "libdummy_binary_libremote-processor.a.so",
+		    "libdummy_binary_libremote-processor.so.so",
+		    "libdummy_binary_remote-process-x86_64-v2.so",
+		    "libdummy_binary_remote-process.so",
+		    "libdummy_binary_test-platform-x86_64-v2.so",
+		    "libdummy_binary_test-platform.so",
+		    "libdummy_ext_parameter_framework-x86_64-v2.so",
+		    "libdummy_ext_parameter_framework.so",
+		    "libdummy_headers_ext_parameter_framework-x86_64-v2.so",
+		    "libdummy_headers_ext_parameter_framework.so",
+		    "libdummy_shared_parameter_framework-x86_64-v2.so",
+		    "libdummy_shared_parameter_framework.so",
+		    "libparameter-x86_64-v2.so",
+		    "libparameter.so",
+		    "libremote-processor-x86_64-v2.so",
+		    "libremote-processor.so"
+	],
+	"requireLibs": [	
+		    "libc++_shared.so",
+		    "libc.so",
+		    "libdl.so",
+		    "libm.so",
+		    "libxml2.so.16"
+	],
+	"visible": true
+}

@@ -1,0 +1,315 @@
+// Auto-generated prebuilt Blueprint for external/parameter-framework
+// Extracted from Extractive APEX package: org.blisslabs.ag.ext.parameter-framework
+
+package {
+    default_applicable_licenses: ["external_parameter-framework_license"],
+}
+
+license {
+    name: "external_parameter-framework_license",
+    visibility: [":__subpackages__"],
+    license_kinds: [
+        "SPDX-license-identifier-BSD",
+        "SPDX-license-identifier-BSL-1.0",
+        "SPDX-license-identifier-MIT",
+    ],
+    license_text: [
+        "COPYING.txt",
+        "NOTICE",
+    ],
+}
+
+cc_prebuilt_library_shared {
+    name: "libremote-processor",
+    host_supported: true,
+    vendor_available: true,
+    export_include_dirs: [
+        "include",
+        "include/parameter-framework",
+    ],
+    arch: {
+        x86_64: {
+            srcs: ["lib/libremote-processor.so"],
+        },
+    },
+    prefer: true,
+}
+
+cc_prebuilt_library_static {
+    name: "libremote-processor_static",
+    host_supported: true,
+    vendor_available: true,
+    export_include_dirs: [
+        "include",
+        "include/parameter-framework",
+    ],
+    arch: {
+        x86_64: {
+            srcs: ["lib/libremote-processor.a"],
+        },
+    },
+    prefer: true,
+}
+
+cc_prebuilt_library_static {
+    name: "libpfw_utility",
+    host_supported: true,
+    vendor_available: true,
+    export_include_dirs: [
+        "include",
+        "include/parameter-framework",
+    ],
+    arch: {
+        x86_64: {
+            srcs: ["lib/libpfw_utility.a"],
+        },
+    },
+    prefer: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "libparameter",
+    host_supported: true,
+    vendor_available: true,
+    export_include_dirs: [
+        "include",
+        "include/parameter-framework",
+    ],
+    arch: {
+        x86_64: {
+            srcs: ["lib/libparameter.so"],
+        },
+    },
+    shared_libs: [
+        "libxml2",
+        "libremote-processor",
+    ],
+    prefer: true,
+}
+
+cc_prebuilt_library_static {
+    name: "libparameter_static",
+    host_supported: true,
+    vendor_available: true,
+    export_include_dirs: [
+        "include",
+        "include/parameter-framework",
+    ],
+    arch: {
+        x86_64: {
+            srcs: ["lib/libparameter.a"],
+        },
+    },
+    prefer: true,
+}
+
+cc_prebuilt_binary {
+    name: "test-platform",
+    arch: {
+        x86_64: {
+            srcs: ["bin/test-platform"],
+        },
+    },
+    prefer: true,
+}
+
+cc_prebuilt_binary {
+    name: "domainGeneratorConnector",
+    device_supported: false,
+    host_supported: true,
+    arch: {
+        x86_64: {
+            srcs: ["bin/domainGeneratorConnector"],
+        },
+    },
+    prefer: true,
+}
+
+cc_prebuilt_binary {
+    name: "remote-process",
+    arch: {
+        x86_64: {
+            srcs: ["bin/remote-process"],
+        },
+    },
+    prefer: true,
+}
+
+filegroup {
+    name: "EddParser.py-srcs",
+    srcs: ["upstream/tools/xmlGenerator/EddParser.py"],
+    path: "upstream/tools/xmlGenerator/",
+}
+
+python_library_host {
+    name: "EddParser.py",
+    srcs: [":EddParser.py-srcs"],
+}
+
+filegroup {
+    name: "PfwBaseTranslator.py-srcs",
+    srcs: ["upstream/tools/xmlGenerator/PfwBaseTranslator.py"],
+    path: "upstream/tools/xmlGenerator/",
+}
+
+python_library_host {
+    name: "PfwBaseTranslator.py",
+    srcs: [":PfwBaseTranslator.py-srcs"],
+}
+
+filegroup {
+    name: "PFWScriptGenerator.py-srcs",
+    srcs: ["upstream/tools/xmlGenerator/PFWScriptGenerator.py"],
+    path: "upstream/tools/xmlGenerator/",
+}
+
+python_library_host {
+    name: "PFWScriptGenerator.py",
+    srcs: [":PFWScriptGenerator.py-srcs"],
+    libs: [
+        "PfwBaseTranslator.py",
+        "EddParser.py",
+    ],
+}
+
+filegroup {
+    name: "hostConfig.py-srcs",
+    srcs: ["upstream/tools/xmlGenerator/hostConfig.py"],
+    path: "upstream/tools/xmlGenerator/",
+}
+
+python_library_host {
+    name: "hostConfig.py",
+    srcs: [":hostConfig.py-srcs"],
+}
+
+python_binary_host {
+    name: "domainGenerator.py",
+    main: "upstream/tools/xmlGenerator/domainGenerator.py",
+    srcs: ["upstream/tools/xmlGenerator/domainGenerator.py"],
+    libs: [
+        "EddParser.py",
+        "hostConfig.py",
+        "PFWScriptGenerator.py",
+    ],
+    required: [
+        "domainGeneratorConnector",
+    ],
+}
+
+sh_binary {
+    name: "updateRoutageDomains.sh",
+    host_supported: true,
+    src: "upstream/tools/xmlGenerator/updateRoutageDomains.sh",
+}
+
+sh_binary {
+    name: "domainGenerator.sh",
+    host_supported: true,
+    src: "upstream/tools/xmlGenerator/domainGenerator.sh",
+}
+
+sh_binary {
+    name: "lightRoutingUpdate.sh",
+    host_supported: true,
+    src: "upstream/tools/xmlGenerator/lightRoutingUpdate.sh",
+}
+
+filegroup {
+    name: "parameter_frameworks_configuration_schemas",
+    srcs: [
+        "upstream/schemas/ParameterFrameworkConfiguration.xsd",
+        "upstream/schemas/ConfigurableDomain.xsd",
+        "upstream/schemas/ConfigurableDomains.xsd",
+        "upstream/schemas/SystemClass.xsd",
+        "upstream/schemas/ParameterSettings.xsd",
+        "upstream/schemas/FileIncluder.xsd",
+        "upstream/schemas/Subsystem.xsd",
+        "upstream/schemas/ComponentLibrary.xsd",
+        "upstream/schemas/ComponentTypeSet.xsd",
+        "upstream/schemas/W3cXmlAttributes.xsd",
+        "upstream/schemas/Parameter.xsd",
+    ],
+    path: "upstream/",
+}
+
+prebuilt_etc_host {
+    name: "ParameterFrameworkConfiguration.xsd",
+    src: "upstream/schemas/ParameterFrameworkConfiguration.xsd",
+    sub_dir: "parameter-framework/Schemas",
+}
+
+prebuilt_etc_host {
+    name: "ConfigurableDomain.xsd",
+    src: "upstream/schemas/ConfigurableDomain.xsd",
+    sub_dir: "parameter-framework/Schemas",
+    required: ["ParameterSettings.xsd"],
+}
+
+prebuilt_etc_host {
+    name: "ConfigurableDomains.xsd",
+    src: "upstream/schemas/ConfigurableDomains.xsd",
+    sub_dir: "parameter-framework/Schemas",
+    required: ["ConfigurableDomain.xsd"],
+}
+
+prebuilt_etc_host {
+    name: "SystemClass.xsd",
+    src: "upstream/schemas/SystemClass.xsd",
+    sub_dir: "parameter-framework/Schemas",
+    required: [
+        "FileIncluder.xsd",
+        "Subsystem.xsd",
+    ],
+}
+
+prebuilt_etc_host {
+    name: "ParameterSettings.xsd",
+    src: "upstream/schemas/ParameterSettings.xsd",
+    sub_dir: "parameter-framework/Schemas",
+}
+
+prebuilt_etc_host {
+    name: "FileIncluder.xsd",
+    src: "upstream/schemas/FileIncluder.xsd",
+    sub_dir: "parameter-framework/Schemas",
+}
+
+prebuilt_etc_host {
+    name: "Subsystem.xsd",
+    src: "upstream/schemas/Subsystem.xsd",
+    sub_dir: "parameter-framework/Schemas",
+    required: ["ComponentLibrary.xsd"],
+}
+
+prebuilt_etc_host {
+    name: "ComponentLibrary.xsd",
+    src: "upstream/schemas/ComponentLibrary.xsd",
+    sub_dir: "parameter-framework/Schemas",
+    required: [
+        "ComponentTypeSet.xsd",
+        "W3cXmlAttributes.xsd",
+    ],
+}
+
+prebuilt_etc_host {
+    name: "ComponentTypeSet.xsd",
+    src: "upstream/schemas/ComponentTypeSet.xsd",
+    sub_dir: "parameter-framework/Schemas",
+    required: [
+        "Parameter.xsd",
+        "W3cXmlAttributes.xsd",
+    ],
+}
+
+prebuilt_etc_host {
+    name: "W3cXmlAttributes.xsd",
+    src: "upstream/schemas/W3cXmlAttributes.xsd",
+    sub_dir: "parameter-framework/Schemas",
+}
+
+prebuilt_etc_host {
+    name: "Parameter.xsd",
+    src: "upstream/schemas/Parameter.xsd",
+    sub_dir: "parameter-framework/Schemas",
+}
